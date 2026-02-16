@@ -194,7 +194,7 @@ padding:20px;
 
 <input type="time" id="time" required>
 
-<button type="submit">Submit</button>
+<button type="submit" class="btn">Submit</button>
 
 </form>
 
@@ -309,7 +309,7 @@ def book():
                   sender=app.config['MAIL_USERNAME'],
                   recipients=["gkrishna6996@gmail.com"]) # Jahan email bhejna hai
     
-    msg.body = f"New Booking!\n\nNaam: {data['name']}\nPhone: {data['phone']}\nService: {data['service']}"
+    msg.body = f"New Booking!\n\nName: {data['name']}\nPhone: {data['phone']}\nService: {data['service']}\nDate of Appoinment; {data['date']}\nTime of Appoinment: {data['time']} "
     
     try:
         mail.send(msg)
