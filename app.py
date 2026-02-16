@@ -329,5 +329,9 @@ def admin_panel():
     # Ye data admin.html page ko bhej rahe hain
     return render_template("admin.html", bookings=rows)
 
-
-app.run(debug=True)
+if __name__ == "__main__":
+    import os
+    # Render default mein port provide karta hai, agar nahi toh 5000 use hoga
+    port = int(os.environ.get("PORT", 5000))
+    # host='0.0.0.0' hona sabse zaroori hai Render ke liye
+    app.run(host='0.0.0.0', port=port)
