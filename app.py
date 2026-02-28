@@ -1,5 +1,5 @@
 from flask_mail import Mail, Message
-from flask import Flask, request, jsonify, render_template_string
+from flask import Flask, render_template, request, jsonify, render_template_string
 import sqlite3
 
 
@@ -190,9 +190,9 @@ padding:20px;
 
 </select>
 
-<input type="date" id="date" required>
+<input type="date" name="date" id="date" required>
 
-<input type="time" id="time" required>
+<input type="time" name="time" id="time" required>
 
 <button type="submit" class="btn">Submit</button>
 
