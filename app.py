@@ -36,198 +36,123 @@ HTML_PAGE = """
 
 <!DOCTYPE html>
 <html>
-
 <head>
-
-<title>Prime Smart Health Care</title>
-
-<style>
-
-body{
-font-family: Arial;
-margin:0;
-background:#f4f8fb;
-}
-
-header{
-background:#0a6ebd;
-color:white;
-padding:20px;
-text-align:center;
-}
-
-nav{
-background:#0c8f6a;
-padding:15px;
-text-align:center;
-}
-
-nav a{
-color:white;
-margin:15px;
-text-decoration:none;
-font-weight:bold;
-}
-
-.hero{
-text-align:center;
-padding:50px;
-}
-
-.hero button{
-padding:15px;
-background:#0a6ebd;
-color:white;
-border:none;
-font-size:18px;
-cursor:pointer;
-}
-
-section{
-padding:40px;
-background:white;
-margin:20px;
-border-radius:10px;
-}
-
-form input, form select{
-display:block;
-margin:10px auto;
-padding:12px;
-width:300px;
-}
-
-button{
-background:green;
-color:white;
-padding:12px;
-border:none;
-cursor:pointer;
-}
-
-footer{
-background:#0a6ebd;
-color:white;
-text-align:center;
-padding:20px;
-}
-
-</style>
-
+    <title>Prime Smart Health Care</title>
+    <style>
+        body { font-family: Arial; margin:0; background:#f4f8fb; }
+        header{ background:#0a6ebd; color:white; padding:20px; text-align:center; }
+        nav{ background:#0c8f6a; padding:15px; text-align:center; }
+        nav a{ color:white; margin:15px; text-decoration:none; font-weight:bold; }
+        .hero{ text-align:center; padding:50px; }
+        .hero button{ padding:15px; background:#0a6ebd; color:white; border:none; font-size:18px; cursor:pointer; }
+        section{ padding:40px; background:white; margin:20px; border-radius:10px; }
+        form input, form select{ display:block; margin:10px auto; padding:12px; width:300px; }
+        button{ background:green; color:white; padding:12px; border:none; cursor:pointer; }
+        footer{ background:#0a6ebd; color:white; text-align:center; padding:20px; }
+    </style>
 </head>
-
-
 <body>
+    <header>
+        <h1>Prime Smart Health Care</h1>
+        <p>Reliable Care. Trained Hands.</p>
+        <p>Email: primesmarthealthcare@aol.com</p>
+    </header>
 
-<header>
+    <nav>
+        <a href="#">Home</a>
+        <a href="#services">Services</a>
+        <a href="#appointment">Book Appointment</a>
+        <a href="#contact">Contact</a>
+    </nav>
 
-<h1>Prime Smart Health Care</h1>
+    <div class="hero">
+        <h2>Hospital-Level Care at Your Home</h2>
+        <p>ICU Care | Elder Care | Nursing Staff</p>
+        <button onclick="scrollToAppointment()">Book Appointment</button>
+    </div>
 
-<p>Reliable Care. Trained Hands.</p>
+    <section id="services">
+        <h2>Our Services</h2>
+        <ul>
+            <li>24x7 Doctor Support</li>
+            <li>ICU at Home</li>
+            <li>Elder Care</li>
+            <li>Nursing Staff</li>
+            <li>Physiotherapy</li>
+            <li>Medical Equipment</li>
+        </ul>
+    </section>
 
-<p>Email: primesmarthealthcare@aol.com</p>
+    <section id="appointment">
+        <h2>Book Appointment</h2>
+        <form onsubmit="bookAppointment(event)">
+            <input type="text" id="name" placeholder="Full Name" required>
+            <input type="number" id="age" placeholder="Age" required>
+            <input type="text" id="phone" placeholder="Phone Number" required>
+            <select id="service">
+                <option>Elder Care</option>
+                <option>ICU at Home</option>
+                <option>Nursing Staff</option>
+                <option>Physiotherapy</option>
+            </select>
+            <input type="date" id="date" required>
+            <input type="time" id="time" required>
+            <button type="submit" class="btn">Submit</button>
+        </form>
+        <p id="message" style="text-align:center; font-weight:bold;"></p>
+    </section>
 
-</header>
+    <section id="contact">
+        <h2>Contact</h2>
+        <p>Gurmit Dhiman: 9034385357</p>
+        <p>Anu Sharma: 9217356338</p>
+        <p>Mamta Dhawan: 9217356339</p>
+        <p>Address: 1001 Tower 2, Pareena Micasa Sec. 68, Gurugram</p>
+    </section>
 
+    <footer>
+        <p>© 2026 Prime Smart Health Care</p>
+    </footer>
 
-<nav>
+    <script>
+        function scrollToAppointment() {
+            document.getElementById('appointment').scrollIntoView({ behavior: 'smooth' });
+        }
 
-<a href="#">Home</a>
-<a href="#services">Services</a>
-<a href="#appointment">Book Appointment</a>
-<a href="#contact">Contact</a>
+        function bookAppointment(e) {
+            e.preventDefault();
+            const msgTag = document.getElementById("message");
+            msgTag.innerHTML = "Processing...";
 
-</nav>
+            const data = {
+                name: document.getElementById("name").value,
+                age: document.getElementById("age").value,
+                phone: document.getElementById("phone").value,
+                service: document.getElementById("service").value,
+                date: document.getElementById("date").value,
+                time: document.getElementById("time").value
+            };
 
-
-<div class="hero">
-
-<h2>Hospital-Level Care at Your Home</h2>
-
-<p>ICU Care | Elder Care | Nursing Staff</p>
-
-<button onclick="scrollToAppointment()">Book Appointment</button>
-
-</div>
-
-
-<section id="services">
-
-<h2>Our Services</h2>
-
-<ul>
-
-<li>24x7 Doctor Support</li>
-<li>ICU at Home</li>
-<li>Elder Care</li>
-<li>Nursing Staff</li>
-<li>Physiotherapy</li>
-<li>Medical Equipment</li>
-
-</ul>
-
-</section>
-
-
-<section id="appointment">
-
-<h2>Book Appointment</h2>
-
-<form onsubmit="bookAppointment(event)">
-
-<input type="text" id="name" placeholder="Full Name" required>
-
-<input type="number" id="age" placeholder="Age" required>
-
-<input type="text" id="phone" placeholder="Phone Number" required>
-
-<select id="service">
-
-<option>Elder Care</option>
-<option>ICU at Home</option>
-<option>Nursing Staff</option>
-<option>Physiotherapy</option>
-
-</select>
-
-<input type="date" name="date" id="date" required>
-
-<input type="time" name="time" id="time" required>
-
-<button type="submit" class="btn">Submit</button>
-
-</form>
-
-<p id="message"></p>
-
-</section>
-
-
-<section id="contact">
-
-<h2>Contact</h2>
-
-<p>Gurmit Dhiman: 9034385357</p>
-<p>Anu Sharma: 9217356338</p>
-<p>Mamta Dhawan: 9217356339</p>
-
-<p>Address: 1001 Tower 2, Pareena Micasa Sec. 68, Gurugram</p>
-
-</section>
-
-
-<footer>
-
-<p>© 2026 Prime Smart Health Care</p>
-
-</footer>
-
-
-
-
+            fetch("/book", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+                msgTag.innerHTML = result.message;
+                msgTag.style.color = "green";
+                e.target.reset(); // Clears form after success
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                msgTag.innerHTML = "❌ Error. Check Terminal.";
+                msgTag.style.color = "red";
+            });
+        }
+    </script>
 </body>
 </html>
-
 """
 
 
