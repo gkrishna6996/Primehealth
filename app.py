@@ -160,44 +160,35 @@ HTML_PAGE = """
 def home():
     return render_template_string(HTML_PAGE)
 
-
 @app.route("/book", methods=["POST"])
 def book():
-
-    data = request.json
-
-    conn = sqlite3.connect("appointments.db")
-    cursor = conn.cursor()
-
-    cursor.execute("""
-    INSERT INTO appointments
-    (name, age, phone, service, date, time)
-    VALUES (?, ?, ?, ?, ?, ?)
-    """, (
-
-        data["name"],
-        data["age"],
-        data["phone"],
-        data["service"],
-        data["date"],
-        data["time"]
-
-    ))
-
-    conn.commit()
-    conn.close()
-    msg = Message("New Appointment - Prime Smart Health Care",
-                  sender=app.config['MAIL_USERNAME'],
-                  recipients=["gkrishna6996@gmail.com"]) # Jahan email bhejna hai
-    
-    msg.body = f"New Booking!\n\nName: {data['name']}\nPhone: {data['phone']}\nService: {data['service']}\nDate of Appoinment; {data['date']}\nTime of Appoinment: {data['time']} "
-    
     try:
-        mail.send(msg)
-    except Exception as e:
-        print(f"Mail nahi gaya: {e}")
+        data = request.json
+        
+        # Database Insertion
+        conn = sqlite3.connect("appointments.db")
+        cursor = conn.cursor()
+        cursor.execute("""
+            INSERT INTO appointments (name, age, phone, service, date, time)
+            VALUES (?, ?, ?, ?, ?, ?)
+        """, (data["name"], data["age"], data["phone"], data["service"], data["date"], data["time"]))
+        conn.commit()
+        conn.close()
 
-    return jsonify({"message":"✅ Appointment Booked Successfully!"})
+        # Email Preparation
+        msg = Message("New Appointment - Prime Smart Health Care",
+                      sender=app.config['MAIL_USERNAME'],
+                      recipients=["gkrishna6996@gmail.com"])
+        
+        msg.body = f"New Booking!\n\nName: {data['name']}\nPhone: {data['phone']}\nService: {data['service']}\nDate: {data['date']}\nTime: {data['time']}"
+        
+        mail.send(msg)
+        return jsonify({"message": "✅ Appointment Booked & Email Sent!"})
+
+    except Exception as e:
+        print(f"Server Error: {e}")
+        return jsonify({"message": f"❌ Error: {str(e)}"}), 500
+    
 @app.route("/admin")
 def admin_panel():
     conn = sqlite3.connect('appointments.db')
