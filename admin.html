@@ -8,6 +8,7 @@
         th { background-color: #4CAF50; color: white; }
     </style>
 </head>
+
 <body>
     <h1>Prime Smart Health Care - All Bookings</h1>
     <table>
@@ -23,5 +24,50 @@
             <td>{{ booking[1] }}</td> <td>{{ booking[2] }}</td> <td>{{ booking[3] }}</td> <td>{{ booking[4] }}</td> <td>{{ booking[5] }}</td> </tr>
         {% endfor %}
     </table>
+    <script>
+
+function scrollToAppointment(){
+document.getElementById("appointment").scrollIntoView();
+}
+
+
+function bookAppointment(e){
+
+e.preventDefault();
+
+const data = {
+
+name: document.getElementById("name").value,
+age: document.getElementById("age").value,
+phone: document.getElementById("phone").value,
+service: document.getElementById("service").value,
+date: document.getElementById("date").value,
+time: document.getElementById("time").value
+
+};
+
+
+fetch("/book", {
+
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify(data)
+
+})
+
+.then(response=>response.json())
+.then(result=>{
+
+document.getElementById("message").innerHTML=result.message;
+
+});
+
+}
+
+</script>
+
+
 </body>
 </html>

@@ -224,50 +224,6 @@ padding:20px;
 
 
 
-<script>
-
-function scrollToAppointment(){
-document.getElementById("appointment").scrollIntoView();
-}
-
-
-function bookAppointment(e){
-
-e.preventDefault();
-
-const data = {
-
-name: document.getElementById("name").value,
-age: document.getElementById("age").value,
-phone: document.getElementById("phone").value,
-service: document.getElementById("service").value,
-date: document.getElementById("date").value,
-time: document.getElementById("time").value
-
-};
-
-
-fetch("/book", {
-
-method:"POST",
-headers:{
-"Content-Type":"application/json"
-},
-body:JSON.stringify(data)
-
-})
-
-.then(response=>response.json())
-.then(result=>{
-
-document.getElementById("message").innerHTML=result.message;
-
-});
-
-}
-
-</script>
-
 
 </body>
 </html>
